@@ -51,7 +51,7 @@ function HttpStatusAccessory(log, config)
 		var powerurl = this.status_url;
 		
 		var statusemitter = pollingtoevent(function(done) {
-			that.log("start polling..");
+			//that.log("start polling..");
 			that.getPowerState( function( error, response) {
 				//pass also the setAttempt, to force a homekit update if needed
 				done(error, response, that.setAttempt);
@@ -174,7 +174,7 @@ getPowerState: function(callback, context) {
 //if context is statuspoll, then we need to request the actual value
 	if (!context || context != "statuspoll") {
 		if (this.switchHandling == "poll") {
-			this.log("getPowerState - polling mode, return state: ", this.state);
+			//this.log("getPowerState - polling mode, return state: ", this.state);
 			callback(null, this.state);
 			return;
 		}
@@ -187,7 +187,7 @@ getPowerState: function(callback, context) {
     }
     
     var url = this.status_url;
-    this.log("getPowerState - actual mode");
+    //this.log("getPowerState - actual mode");
 	var that = this;
 
     this.httpRequest(url, "", "GET", this.username, this.password, this.sendimmediately, function(error, response, responseBody) {
@@ -213,7 +213,7 @@ getPowerState: function(callback, context) {
 		} else {
 			var binaryState = parseInt(tResp);
 			var powerState = binaryState > 0;
-			that.log("getPowerState - actual mode - current state: %s", powerState);
+			//that.log("getPowerState - actual mode - current state: %s", powerState);
 			that.state = powerState;
 			callback(null, powerState);
 		}
